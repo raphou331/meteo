@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>WEATHER APP</title>
+  </head>
+  <body>
+    <section class="wrapper">
+      <form action="/meteo" method="get">
+        <input type="text" name="city" placeholder="Entrez votre ville" />
+        <button type="submit">Get Meteo</button>
+      </form>
+
+      <section class="graph">
+        <% if (meteo) { %>
+        <h1><%= city.toUpperCase() %></h1>
+        <% } %>
+      </section>
+
+      <section class="clock">
+        <% if (error) { %>
+        <p class="error"><%= error %></p>
+        <% } else if (meteo) { %>
+        <figure class="flipper">
+          <% if (meteo.weather[0].main == "Clear") { %>
+          <span class="icon">2</span>
+          <%} else if (meteo.weather[0].main == "Clouds") { %>
+          <span class="icon">3</span>
+          <%} else if (meteo.weather[0].main == "Tornado") { %>
+          <span class="icon">4</span>
+          <%} else if (meteo.weather[0].main == "Rain" ||
+          weather.weather[0].main == "Drizzle" || weather.weather[0].main ==
+          "Haze") { %>
+          <span class="icon">5</span>
+          <% } %>
+        </figure>
+
+        <figure class="flipper">
+          <span> <%= Math.floor(meteo.main.temp) %></span>
+        </figure>
+      </section>
+
+      <% } %>
+    </section>
+  </body>
+</html>
